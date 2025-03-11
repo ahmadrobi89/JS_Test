@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Internship Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 20px;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1, h2 {
+            text-align: center;
+            color: #333;
+        }
+        .section {
+            background: #fff;
+            padding: 15px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .section h3 {
+            cursor: pointer;
+            margin: 0;
+            padding: 10px;
+            background: #007BFF;
+            color: white;
+            border-radius: 5px;
+        }
+        .content {
+            display: none;
+            padding: 10px;
+        }
+        pre {
+            background: #eee;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Internship Programming Test</h1>
+        <h2>JavaScript & Web Development</h2>
+
+        <p><strong>Duration:</strong> 2 hours</p>
+        <p><strong>Tools Allowed:</strong> Any JavaScript framework or vanilla JavaScript</p>
+
+        <div class="section">
+            <h3 onclick="toggleSection(this)">Section 1: JavaScript Fundamentals (10 points)</h3>
+            <div class="content">
+                <p>Answer the following questions:</p>
+                <ul>
+                    <li>What is the difference between `let`, `const`, and `var`?</li>
+                    <li>Explain the concept of closures in JavaScript.</li>
+                    <li>How does the `this` keyword behave in JavaScript?</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3 onclick="toggleSection(this)">Section 2: DOM Manipulation (20 points)</h3>
+            <div class="content">
+                <p>Write a JavaScript function to dynamically add a new `<li>` item to an existing `<ul>` list in the DOM.</p>
+                <pre>
+function addItem() {
+    let ul = document.getElementById("myList");
+    let li = document.createElement("li");
+    li.textContent = "New Item";
+    ul.appendChild(li);
+}
+                </pre>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3 onclick="toggleSection(this)">Section 3: Async & Promises (20 points)</h3>
+            <div class="content">
+                <p>Modify the following function to use `async/await` instead of `.then()`:</p>
+                <pre>
+function fetchData() {
+    fetch("https://jsonplaceholder.typicode.com/posts/1")
+        .then(response => response.json())
+        .then(data => console.log(data))
+        .catch(error => console.error("Error:", error));
+}
+                </pre>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3 onclick="toggleSection(this)">Section 4: Debugging & Optimization (20 points)</h3>
+            <div class="content">
+                <p>Fix the errors in the following JavaScript function:</p>
+                <pre>
+function multiplyNumbers(a, b) {
+    console.log("Multiplication result: " + (a * b)); // Fix the bug
+}
+multiplyNumbers(5, 3);
+                </pre>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3 onclick="toggleSection(this)">Section 5: Mini Project - To-Do List (30 points)</h3>
+            <div class="content">
+                <p>Create a simple To-Do List web application using JavaScript.</p>
+                <p>It should allow users to:</p>
+                <ul>
+                    <li>Add tasks</li>
+                    <li>Mark tasks as completed</li>
+                    <li>Remove tasks</li>
+                </ul>
+                <p><strong>Example Starter Code:</strong></p>
+                <pre>
+document.getElementById("addBtn").addEventListener("click", function() {
+    let taskInput = document.getElementById("taskInput");
+    let taskList = document.getElementById("taskList");
+
+    let li = document.createElement("li");
+    li.textContent = taskInput.value;
+    
+    let removeBtn = document.createElement("button");
+    removeBtn.textContent = "Remove";
+    removeBtn.onclick = function() {
+        taskList.removeChild(li);
+    };
+
+    li.appendChild(removeBtn);
+    taskList.appendChild(li);
+    taskInput.value = "";
+});
+                </pre>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3 onclick="toggleSection(this)">Submission Guide</h3>
+            <div class="content">
+                <p>Follow these steps to submit your test:</p>
+                <h4>Option 1: GitHub Submission</h4>
+                <ol>
+                    <li>Create a GitHub repository.</li>
+                    <li>Add all your project files to the repository.</li>
+                    <li>Ensure you have a <code>README.md</code> explaining your solutions.</li>
+                    <li>Push your code to GitHub.</li>
+                    <li>Submit the GitHub repository link.</li>
+                </ol>
+
+                <h4>Option 2: ZIP File Submission</h4>
+                <ol>
+                    <li>Create a new folder and place all your files inside it.</li>
+                    <li>Name the folder as <code>YourName_JS_Test</code>.</li>
+                    <li>Compress the folder into a ZIP file.</li>
+                    <li>Send the ZIP file via email or upload it to a cloud drive and share the link.</li>
+                </ol>
+
+                <p><strong>Important:</strong> Ensure that all files are working and properly structured.</p>
+            </div>
+        </div>
+
+        <script>
+            function toggleSection(element) {
+                var content = element.nextElementSibling;
+                content.style.display = (content.style.display === "block") ? "none" : "block";
+            }
+        </script>
+
+</body>
+</html>

@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JavaScript Internship Test</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        margin: 20px;
+        padding: 20px;
+      }
+      .container {
+        max-width: 800px;
+        margin: auto;
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+      h1,
+      h2 {
+        text-align: center;
+        color: #333;
+      }
+      .section {
+        background: #fff;
+        padding: 15px;
+        margin-bottom: 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+      }
+      .section h3 {
+        cursor: pointer;
+        margin: 0;
+        padding: 10px;
+        background: #007bff;
+        color: white;
+        border-radius: 5px;
+      }
+      .content {
+        display: none;
+        padding: 10px;
+      }
+      pre {
+        background: #eee;
+        padding: 10px;
+        border-radius: 5px;
+        overflow-x: auto;
+        white-space: pre-wrap;
+      }
+      .task {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 5px 0;
+        padding: 5px;
+        background: #f1f1f1;
+        border-radius: 5px;
+      }
+      .completed {
+        text-decoration: line-through;
+        color: gray;
+      }
+      .task button {
+        margin-left: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Internship Programming Test</h1>
+      <h2>JavaScript & Web Development</h2>
+
+      <p><strong>Duration:</strong> 2 hours</p>
+      <p>
+        <strong>Tools Allowed:</strong> Any JavaScript framework or vanilla
+        JavaScript
+      </p>
+
+      <div class="section">
+        <h3 onclick="toggleSection(this)">
+          Section 1: JavaScript Fundamentals (10 points)
+        </h3>
+        <div class="content">
+          <pre id="jsFundamentals"></pre>
+        </div>
+      </div>
+
+      <div class="section">
+        <h3 onclick="toggleSection(this)">
+          Section 2: DOM Manipulation (20 points)
+        </h3>
+        <div class="content">
+          <ul id="myList">
+            <li>Example Item</li>
+          </ul>
+          <button onclick="addItem()">Add List Item</button>
+        </div>
+      </div>
+
+      <div class="section">
+        <h3 onclick="toggleSection(this)">
+          Section 3: Async & Promises (20 points)
+        </h3>
+        <div class="content">
+          <button onclick="fetchData()">Fetch Data</button>
+          <pre id="fetchResult"></pre>
+        </div>
+      </div>
+
+      <div class="section">
+        <h3 onclick="toggleSection(this)">
+          Section 4: Debugging & Optimization (20 points)
+        </h3>
+        <div class="content">
+          <button onclick="multiplyNumbers(5, 3)">
+            Run the function, dude!
+          </button>
+        </div>
+      </div>
+
+      <div class="section">
+        <h3 onclick="toggleSection(this)">
+          Section 5: Mini Project - To-Do List (30 points)
+        </h3>
+        <div class="content">
+          <input type="text" id="taskInput" placeholder="Add a task" />
+          <button id="addBtn">Add</button>
+          <ul id="taskList"></ul>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Section 1: JavaScript Fundamentals
+      function showFundamentals() {
+        const explanation = `
+1. Differences between let, const, and var:
+   - let: Block-scoped, cannot be redeclared, cannot be accessed before declaration.
+   - const: Block-scoped, value cannot be changed after declaration.
+   - var: Function-scoped, can be redeclared, affected by hoisting.
+
+2. Closure is a function that has access to the parent scope, after the parent function has closed.
+   Example :
+
+   function outerFunction(outerValue) {
+       return function innerFunction(innerValue) {
+           console.log(\`Outer: \${outerValue}, Inner: \${innerValue}\`);
+       };
+   }
+   const closureExample = outerFunction("Hello");
+   closureExample("World");
+
+   InnerFunction still can access the outerValue even after outerFunction has finished executing.
+
+3. The this keyword in JavaScript refers to the context in which a function is executed.
+   Its value depends on how and where the function is called
+   (global, function, object, class, arrow function).
+   `;
+        document.getElementById("jsFundamentals").textContent = explanation;
+      }
+      showFundamentals();
+
+      // soal nomor 2
+      function addItem() {
+        let ul = document.getElementById("myList");
+        if (!ul) return;
+
+        let li = document.createElement("li");
+        li.textContent = "New Item";
+        ul.appendChild(li);
+      }
+
+      // soal nomor 3
+      async function fetchData() {
+        try {
+          let response = await fetch(
+            "https://jsonplaceholder.typicode.com/posts/1"
+          );
+          let data = await response.json();
+          document.getElementById("fetchResult").textContent = JSON.stringify(
+            data,
+            null,
+            2
+          );
+        } catch (error) {
+          console.error("Error:", error);
+        }
+      }
+
+      // soal nomor 4
+      function multiplyNumbers(a, b) {
+        if (typeof a !== "number" || typeof b !== "number") {
+          console.error("Error: Harus angka!.");
+          return;
+        }
+        console.log("Multiplication result:", a * b);
+      }
+
+      // last but not least
+      document.addEventListener("DOMContentLoaded", function () {
+        const addBtn = document.getElementById("addBtn");
+        const taskInput = document.getElementById("taskInput");
+        const taskList = document.getElementById("taskList");
+
+        addBtn.addEventListener("click", function () {
+          let taskText = taskInput.value.trim();
+          if (taskText === "") {
+            alert("Please enter a task!");
+            return;
+          }
+
+          let li = document.createElement("li");
+          li.className = "task";
+          li.textContent = taskText;
+
+          let completeBtn = document.createElement("button");
+          completeBtn.textContent = "Complete";
+          completeBtn.onclick = function () {
+            li.classList.toggle("completed");
+          };
+
+          let removeBtn = document.createElement("button");
+          removeBtn.textContent = "Remove";
+          removeBtn.onclick = function () {
+            taskList.removeChild(li);
+          };
+
+          li.appendChild(completeBtn);
+          li.appendChild(removeBtn);
+          taskList.appendChild(li);
+          taskInput.value = "";
+        });
+      });
+
+      // Toggle Section Visibility
+      function toggleSection(element) {
+        var content = element.nextElementSibling;
+        content.style.display =
+          content.style.display === "block" ? "none" : "block";
+      }
+    </script>
+  </body>
+</html>
